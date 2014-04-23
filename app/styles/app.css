@@ -1,0 +1,13 @@
+html {
+  background: #000000;
+} 
+
+.grey-bg-top{
+  background-color: #2ecc71;
+  color:white;
+}
+
+.grey-bg-bottom{
+  background-color: #3498db;
+  color:white;
+}
