@@ -6,6 +6,7 @@ define(function(require, exports, module) {
     var View     = require('famous/core/View');
     var StateModifier = require('famous/modifiers/StateModifier');
     var Surface       = require('famous/core/Surface');
+    var SelectSurface       = require('SelectView');
     var ImageSurface  = require('famous/surfaces/ImageSurface');
     var InputSurface  = require('famous/surfaces/InputSurface');
     var Transform     = require('famous/core/Transform');
@@ -101,12 +102,13 @@ define(function(require, exports, module) {
           size:[undefined, 100]
         }
       }));
-      var emailInput = new InputSurface({
-        type: 'select',
+      var questionInput = new SelectSurface({
         name: 'question',
         placeholder: 'Select a Question',
+        opts: {'1' : 'batman', '2': 'superman'},
+        size: [undefined, 100]
       });
-      var passwordInput = new InputSurface({
+      var answerInput = new InputSurface({
         type: 'text',
         name: 'answer',
         placeholder: ''
@@ -116,11 +118,15 @@ define(function(require, exports, module) {
         name: 'send',
         value: 'Send'
       });
+      questionInput.on('change', function(){
+        console.log("Value");
+        console.log(this.getValue());
+      });
       submitButton.on('click', function(){
         displayView(viewManager['main'], 'dashboardView');
       });
-      views.push(createInputView(emailInput));
-      views.push(createInputView(passwordInput));
+      views.push(createInputView(questionInput));
+      views.push(createInputView(answerInput));
       views.push(createInputView(submitButton));
       mainView.add(gridModifier).add(grid);
 
